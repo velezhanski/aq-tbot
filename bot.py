@@ -67,10 +67,9 @@ def main():
 
     # Start the Bot
     updater.start_webhook(listen="0.0.0.0",
-                          port=PORT,
-                          url_path="5183116286:AAGmB109dKDH75wONQIJC3knTGyOBOJt8AI")
-    # updater.bot.set_webhook(url=settings.WEBHOOK_URL)
-    updater.bot.set_webhook("aq-tbot" + "5183116286:AAGmB109dKDH75wONQIJC3knTGyOBOJt8AI")
+                        port=int(PORT),
+                        url_path="5183116286:AAGmB109dKDH75wONQIJC3knTGyOBOJt8AI",
+                        webhook_url = 'https://aq-tbot.herokuapp.com/' + "5183116286:AAGmB109dKDH75wONQIJC3knTGyOBOJt8AI")
 
     # Run the bot until you press Ctrl-C or the process receives SIGINT,
     # SIGTERM or SIGABRT. This should be used most of the time, since
