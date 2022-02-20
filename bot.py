@@ -1,10 +1,8 @@
 """
 Simple Bot to reply to Telegram messages.
-
 First, a few handler functions are defined. Then, those functions are passed to
 the Dispatcher and registered at their respective places.
 Then, the bot is started and runs until we press Ctrl-C on the command line.
-
 Usage:
 Basic Echobot example, repeats messages.
 Press Ctrl-C on the command line or send a signal to the process to stop the
@@ -12,6 +10,7 @@ bot.
 """
 
 import logging
+import os
 
 from telegram.ext import Updater, CommandHandler, MessageHandler, Filters
 
@@ -21,9 +20,11 @@ logging.basicConfig(format='%(asctime)s - %(name)s - %(levelname)s - %(message)s
 
 logger = logging.getLogger(__name__)
 
-
+PORT = int(os.environ.get('PORT', '8443'))
 # Define a few command handlers. These usually take the two arguments update and
 # context. Error handlers also receive the raised TelegramError object in error.
+
+
 def start(update, context):
     """Send a message when the command /start is issued."""
     update.message.reply_text('Hi!')
@@ -65,7 +66,11 @@ def main():
     dp.add_error_handler(error)
 
     # Start the Bot
-    updater.start_polling()
+    updater.start_webhook(listen="0.0.0.0",
+                          port=PORT,
+                          url_path="5183116286:AAGmB109dKDH75wONQIJC3knTGyOBOJt8AI")
+    # updater.bot.set_webhook(url=settings.WEBHOOK_URL)
+    updater.bot.set_webhook("aq-tbot" + "5183116286:AAGmB109dKDH75wONQIJC3knTGyOBOJt8AI")
 
     # Run the bot until you press Ctrl-C or the process receives SIGINT,
     # SIGTERM or SIGABRT. This should be used most of the time, since
